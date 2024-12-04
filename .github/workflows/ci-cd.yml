@@ -38,7 +38,7 @@ jobs:
 
       - name: Deploy to Production
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@192.168.0.227 'docker pull your-docker-image:latest && docker run -d -p 8000:8000 your-docker-image:latest'
+          ssh -o StrictHostKeyChecking=no ubuntu@192.168.0.227 'docker pull your-docker-image:latest && docker run -d -p 8000:8000 muhammadhamzaamin/my-django-ecommerce'
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
