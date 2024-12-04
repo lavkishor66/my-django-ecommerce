@@ -30,7 +30,7 @@ jobs:
       run: |
         python manage.py test
 
-  dockerize:
+  deploy:
     runs-on: ubuntu-latest
     needs: build
 
@@ -49,17 +49,4 @@ jobs:
         docker build -t muhammadhamzaamin/my-django-ecommerce .
         docker push muhammadhamzaamin/my-django-ecommerce
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: dockerize
-
-    steps:
-    - name: Deploy application
-      run: |
-        ssh -o StrictHostKeyChecking=no ubuntu@192.168.0.227 <<EOF
-          docker pull muhammadhamzaamin/my-django-ecommerce
-          docker stop my-django-app || true
-          docker rm my-django-app || true
-          docker run -d --name my-django-app -p 8000:8000 muhammadhamzaamin/my-django-ecommerce
-        EOF
-
+  
